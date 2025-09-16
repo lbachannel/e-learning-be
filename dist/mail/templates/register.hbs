@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Activation Email</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-width: 100%;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            background-color: #FAFAFA;
+            color: #222222;
+        }
+
+        .title {
+            padding: 19px; 
+            background: #efefef;
+        }
+
+        .title__heading {
+            font-size: 24px; 
+            font-weight: 700;
+            text-align: center;
+            color: transparent;
+            background-clip: text;
+            background-image: linear-gradient(to right, #ff1e56 0%, #0096ff 100%);
+            --webkit-background-clip: text;
+            --webkit-text-fill-color: transparent;
+        }
+
+        .context {
+            padding: 19px; 
+            background: #fff;
+        }
+
+        .context__title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .context__text {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .bold {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 600px; margin: 0 auto;">
+        <div class="title">
+            <h1 class="title__heading" >
+                Welcome to E-Learning App
+            </h1>
+        </div>
+        <div class="context">
+            <p class="context__text">Hello {{name}},</p>
+            <p class="context__text">
+                Thank you for registering with E-Learning App. Your activation code is:
+            </p>
+            <h2 class="context__title" >{{activationCode}}</h2>
+            <p class="context__text">
+                Please enter this code within <span class="bold">5 minutes</span> to activate your account.
+            </p>
+            <p class="context__text">
+                If you did not register, please ignore this email.
+            </p>
+            <p class="context__text">
+                Best regards
+            </p>
+            <p class="context__text">
+                AnLB
+            </p>
+        </div>
+    </div>
+</body>
+</html>

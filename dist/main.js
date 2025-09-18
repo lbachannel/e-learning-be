@@ -15,7 +15,10 @@ async function bootstrap() {
         stopAtFirstError: true,
     }));
     app.enableCors({
-        "origin": true,
+        "origin": [
+            "http://localhost:3000",
+            "https://e-learning-wheat-seven.vercel.app",
+        ],
         "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
         "preflightContinue": false,
         credentials: true

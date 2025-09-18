@@ -37,8 +37,8 @@ let UsersService = class UsersService {
         const user = await this.userModel.exists({ email });
         return user ? true : false;
     };
-    _sendMail(email, name, uuid) {
-        this.mailerService
+    async _sendMail(email, name, uuid) {
+        await this.mailerService
             .sendMail({
             to: email,
             subject: 'E-Learning App - Activate your account ✔',
@@ -161,7 +161,7 @@ let UsersService = class UsersService {
             codeId: uuid,
             codeExpired: (0, dayjs_1.default)().add(5, 'minutes')
         });
-        this._sendMail(user?.email, user?.name, uuid);
+        await this._sendMail(user?.email, user?.name, uuid);
         return { _id: user?._id };
     }
 };

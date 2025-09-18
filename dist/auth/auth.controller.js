@@ -53,6 +53,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([
+    (0, common_1.HttpCode)(201),
     (0, common_1.Post)('register'),
     (0, public_route_1.Public)(),
     (0, public_route_1.ResponseMessage)('Register account'),
@@ -62,6 +63,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "register", null);
 __decorate([
+    (0, common_1.HttpCode)(201),
     (0, common_1.Post)('verification'),
     (0, public_route_1.Public)(),
     (0, public_route_1.ResponseMessage)('Verify API'),
@@ -71,6 +73,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "verify", null);
 __decorate([
+    (0, common_1.HttpCode)(201),
     (0, common_1.Post)('retry-verification'),
     (0, public_route_1.Public)(),
     (0, public_route_1.ResponseMessage)('Retry verify API'),

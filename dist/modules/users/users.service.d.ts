@@ -11,7 +11,7 @@ export declare class UsersService {
     private readonly mailerService;
     constructor(userModel: Model<User>, mailerService: MailerService);
     isEmailExist: (email: string) => Promise<boolean>;
-    _sendMail(email: string, name: string, uuid: string): Promise<void>;
+    _sendMail(email: string, name: string, uuid: string): void;
     create(createUserDto: CreateUserDto): Promise<{
         _id: any;
     }>;

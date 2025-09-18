@@ -37,8 +37,8 @@ let UsersService = class UsersService {
         const user = await this.userModel.exists({ email });
         return user ? true : false;
     };
-    async _sendMail(email, name, uuid) {
-        await this.mailerService
+    _sendMail(email, name, uuid) {
+        this.mailerService
             .sendMail({
             to: email,
             subject: 'E-Learning App - Activate your account ✔',
@@ -49,7 +49,9 @@ let UsersService = class UsersService {
             }
         })
             .then(() => { })
-            .catch(() => { });
+            .catch((error) => {
+            console.error("Failed to send mail:", error);
+        });
     }
     async create(createUserDto) {
         const { name, email, password } = createUserDto;

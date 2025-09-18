@@ -25,40 +25,18 @@ const api_query_params_1 = __importDefault(require("api-query-params"));
 const mongoose_3 = __importDefault(require("mongoose"));
 const uuid_1 = require("uuid");
 const dayjs_1 = __importDefault(require("dayjs"));
-const sendEmailUtils_1 = __importDefault(require("../../helpers/sendEmailUtils"));
-const resend_1 = require("resend");
+const mail_service_1 = require("./mail.service");
 let UsersService = class UsersService {
     userModel;
-    resend;
-    constructor(userModel, resend) {
+    mailService;
+    constructor(userModel, mailService) {
         this.userModel = userModel;
-        this.resend = resend;
-        this.resend = new resend_1.Resend(process.env.RESEND_API_KEY);
+        this.mailService = mailService;
     }
     isEmailExist = async (email) => {
         const user = await this.userModel.exists({ email });
         return user ? true : false;
     };
-    async sendActivationMail(email, name, uuid) {
-        try {
-            const html = (0, sendEmailUtils_1.default)("register", {
-                name: name ?? email,
-                activationCode: uuid,
-            });
-            const response = await this.resend.emails.send({
-                from: "onboarding@resend.dev",
-                to: email,
-                subject: "E-Learning App - Activate your account ✔",
-                html,
-            });
-            console.log("Mail sent:", response);
-            return response;
-        }
-        catch (error) {
-            console.error("Failed to send mail:", error);
-            throw error;
-        }
-    }
     async create(createUserDto) {
         const { name, email, password } = createUserDto;
         const isExistEmail = await this.isEmailExist(email);
@@ -131,7 +109,7 @@ let UsersService = class UsersService {
         const user = await this.userModel.create({
             name, email, password: hashPassword, isActive: false, codeId: uuid, codeExpired: (0, dayjs_1.default)().add(5, 'minutes')
         });
-        await this.sendActivationMail(user?.email, user?.name, uuid);
+        await this.mailService.sendActivationMail(user.email, user.name, user.id);
         return { _id: user._id, codeExpired: user.codeExpired };
     }
     async handleVerify(req) {
@@ -169,7 +147,7 @@ let UsersService = class UsersService {
             codeId: uuid,
             codeExpired: (0, dayjs_1.default)().add(5, 'minutes')
         });
-        await this.sendActivationMail(user?.email, user?.name, uuid);
+        await this.mailService.sendActivationMail(user.email, user.name, user.id);
         return { _id: user?._id };
     }
 };
@@ -178,6 +156,6 @@ exports.UsersService = UsersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_2.InjectModel)(user_schema_1.User.name)),
     __metadata("design:paramtypes", [mongoose_1.Model,
-        resend_1.Resend])
+        mail_service_1.MailService])
 ], UsersService);
 //# sourceMappingURL=users.service.js.map

@@ -5,13 +5,12 @@ import { Model } from 'mongoose';
 import mongoose from 'mongoose';
 import { RegisterAuthDto } from '@/auth/dto/register-auth.dto';
 import { VerifyAuthDto } from '@/auth/dto/verify-auth.dto';
-import { Resend } from "resend";
+import { MailService } from './mail.service';
 export declare class UsersService {
     private userModel;
-    private resend;
-    constructor(userModel: Model<User>, resend: Resend);
+    private readonly mailService;
+    constructor(userModel: Model<User>, mailService: MailService);
     isEmailExist: (email: string) => Promise<boolean>;
-    sendActivationMail(email: string, name: string, uuid: string): Promise<import("resend").CreateEmailResponse>;
     create(createUserDto: CreateUserDto): Promise<{
         _id: any;
     }>;

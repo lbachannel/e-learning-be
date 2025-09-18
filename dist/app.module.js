@@ -19,6 +19,7 @@ const jwt_auth_guard_1 = require("./auth/passport/jwt-auth.guard");
 const mailer_1 = require("@nestjs-modules/mailer");
 const handlebars_adapter_1 = require("@nestjs-modules/mailer/dist/adapters/handlebars.adapter");
 const transform_interceptor_1 = require("./core/transform.interceptor");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -51,7 +52,7 @@ exports.AppModule = AppModule = __decorate([
                         from: '"E-learning" <no-reply@localhost>',
                     },
                     template: {
-                        dir: process.cwd() + '/src/mail/templates/',
+                        dir: (0, path_1.join)(__dirname, 'mail', 'templates'),
                         adapter: new handlebars_adapter_1.HandlebarsAdapter(),
                         options: {
                             strict: true,

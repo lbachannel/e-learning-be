@@ -45,7 +45,7 @@ exports.AppModule = AppModule = __decorate([
                         secure: configService.get('MAIL_SECURE'),
                         auth: {
                             user: configService.get('MAIL_USER'),
-                            pass: configService.get('MAIL_PASS'),
+                            pass: configService.get('RESEND_API_KEY'),
                         },
                     },
                     defaults: {

@@ -4,14 +4,14 @@ import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import mongoose from 'mongoose';
 import { RegisterAuthDto } from '@/auth/dto/register-auth.dto';
-import { MailerService } from '@nestjs-modules/mailer';
 import { VerifyAuthDto } from '@/auth/dto/verify-auth.dto';
+import { Resend } from "resend";
 export declare class UsersService {
     private userModel;
-    private readonly mailerService;
-    constructor(userModel: Model<User>, mailerService: MailerService);
+    private resend;
+    constructor(userModel: Model<User>, resend: Resend);
     isEmailExist: (email: string) => Promise<boolean>;
-    _sendMail(email: string, name: string, uuid: string): void;
+    sendActivationMail(email: string, name: string, uuid: string): Promise<import("resend").CreateEmailResponse>;
     create(createUserDto: CreateUserDto): Promise<{
         _id: any;
     }>;

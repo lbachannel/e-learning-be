@@ -16,10 +16,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const auth_module_1 = require("./auth/auth.module");
 const core_1 = require("@nestjs/core");
 const jwt_auth_guard_1 = require("./auth/passport/jwt-auth.guard");
-const mailer_1 = require("@nestjs-modules/mailer");
-const handlebars_adapter_1 = require("@nestjs-modules/mailer/dist/adapters/handlebars.adapter");
 const transform_interceptor_1 = require("./core/transform.interceptor");
-const path_1 = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -33,31 +30,6 @@ exports.AppModule = AppModule = __decorate([
                 imports: [config_1.ConfigModule],
                 useFactory: async (configService) => ({
                     uri: configService.get('MONGODB_URI'),
-                }),
-                inject: [config_1.ConfigService],
-            }),
-            mailer_1.MailerModule.forRootAsync({
-                imports: [config_1.ConfigModule],
-                useFactory: async (configService) => ({
-                    transport: {
-                        host: configService.get('MAIL_HOST'),
-                        port: configService.get('MAIL_PORT'),
-                        secure: configService.get('MAIL_SECURE'),
-                        auth: {
-                            user: configService.get('MAIL_USER'),
-                            pass: configService.get('RESEND_API_KEY'),
-                        },
-                    },
-                    defaults: {
-                        from: '"E-learning" <no-reply@localhost>',
-                    },
-                    template: {
-                        dir: (0, path_1.join)(__dirname, 'mail', 'templates'),
-                        adapter: new handlebars_adapter_1.HandlebarsAdapter(),
-                        options: {
-                            strict: true,
-                        },
-                    },
                 }),
                 inject: [config_1.ConfigService],
             }),
